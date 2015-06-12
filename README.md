@@ -1,1 +1,5 @@
-Metaprogramming Ruby 2nd edition
+Metaprogramming Ruby
+====================
+
+Second Edition, by Paolo Perrotta.
+
