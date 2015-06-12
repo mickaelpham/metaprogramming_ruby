@@ -15,3 +15,31 @@ class Entity
     Database.sql ("SELECT #{col} FROM #{@table} WHERE id=#{@ident}")[0][0]
   end
 end
+
+# Now we can subclass Entity to map to a specific table
+class Movie < Entity
+  def initialize(ident)
+    super "movies", ident
+  end
+
+  def title
+    get "title"
+  end
+
+  def title=(value)
+    set "title", value
+  end
+
+  def director
+    get "director"
+  end
+
+  def director=(value)
+    set "director", value
+  end
+end
+
+# Bob can now load a new movie into the database
+movie          = Movie.new(1)
+movie.title    = "Doctor Strangelove"
+movie.director = "Standley Kubrick"
