@@ -3,12 +3,13 @@ The Object Model
 
 ### Open Class
 
-The `class` keyword in Ruby is more like a scope operator than a class declaration. You
-can always reopen existing classes—even standard library classes such as `String` or
-`Array`—and modify them on the fly.
+The `class` keyword in Ruby is more like a scope operator than a class
+declaration. You can always reopen existing classes—even standard library
+classes such as `String` or `Array`—and modify them on the fly.
 
-However, be careful about this kind of reckless patching of classes, since you can
-quickly fall into the trap and _Monkeypatch_ some existing and important methods!
+However, be careful about this kind of reckless patching of classes, since you
+can quickly fall into the trap and _Monkeypatch_ some existing and important
+methods!
 
 ### Instance Variables
 
@@ -23,7 +24,8 @@ You can access and filter the list of methods on an object through:
 obj.methods.grep(/my/) # => [:my_method]
 ```
 
-Also, make sure to refer to them as _instance methods_ (not just "a method" of `MyClass`).
+Also, make sure to refer to them as _instance methods_ (not just "a method" of
+`MyClass`).
 
 ```ruby
 String.instance_methods == "abc".methods # => true
@@ -80,12 +82,13 @@ end
 
 ### Loading and Requiring
 
-You can force an external program (e.g. `motd.rb`) to keep its constants to itself
-by passing a second, optional argument to `load`:
+You can force an external program (e.g. `motd.rb`) to keep its constants to
+itself by passing a second, optional argument to `load`:
 
 ```ruby
 load('motd.rb', true)
 ```
 
-If you load a file this way, Ruby creates an anonymous module, uses that module as a
-Namespace to contain all the constants from `motd.rb`, and then destroys the module.
+If you load a file this way, Ruby creates an anonymous module, uses that module
+as a Namespace to contain all the constants from `motd.rb`, and then destroys
+the module.
