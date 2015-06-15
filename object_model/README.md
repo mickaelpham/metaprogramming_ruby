@@ -92,3 +92,72 @@ load('motd.rb', true)
 If you load a file this way, Ruby creates an anonymous module, uses that module
 as a Namespace to contain all the constants from `motd.rb`, and then destroys
 the module.
+
+What happens when you call a method?
+------------------------------------
+
+When you call a method, Ruby does two things:
+
+1. It finds the method. This is a process called _method lookup_.
+2. It executes the method. To do that, Ruby needs something called `self`.
+
+### Method Lookup
+
+The _receiver_ is the object that you call a method on. For example, if you
+write `my_string.reverse()`, then `my_string` is the receiver.
+
+To understand the concept of an _ancestors chain_, look at any Ruby class.
+Then imagine moving from the class into its superclass, then into the
+superclass's superclass, and so on, until you reach `BasicObject`, the root
+of the Ruby class hierarchy. The path of classes you just traversed is the
+ancestors chain of the class.
+
+```ruby
+class MyClass
+  def my_method; 'my_method()'; end
+end
+
+class MySubClass < MyClass
+end
+
+obj = MySubClass.new
+obj.my_method()      # => "my_method()"
+
+MySubClass.ancestors # => [MySubClass, MyClass, Object, Kernel, BasicObject]
+```
+
+### Modules and Lookup
+
+When you `include` a module in a class (or even in another module), Ruby
+inserts the module in the ancestors chain, right above the including
+class itself:
+
+```ruby
+module M1
+  def my_method; 'M1#my_method()'; end
+end
+
+class C
+  include M1
+end
+
+class D < C; end
+
+D.ancestors # => [D, C, M1, Object, Kernel, BasicObject]
+```
+
+Starting from Ruby 2.0, you also have a second way to insert a module in a
+class's chain of ancestors: the `prepend` method. It works like `include`,
+but it inserts the module _below_ the including class (sometimes called the
+_includer_), rather than above it.
+
+```ruby
+class C2
+  prepend M2
+end
+
+class D2 < C2; end
+
+D2.ancestors # => [D2, M2, C2, Object, Kernel, BasicObject]
+```
+
