@@ -4,29 +4,20 @@ class Computer
     @data_source = data_source
   end
 
-  def mouse
-    component :mouse
+  def self.define_component(name)
+    define_method(name) do
+      info   = @data_source.send "get_#{name}_info",  @id
+      price  = @data_source.send "get_#{name}_price", @id
+
+      result = "#{name.capitalize}: #{info} ($#{price})"
+
+      return "* #{result}" if price >= 100
+      result
+    end
   end
 
-  def cpu
-    component :cpu
-  end
-
-  def keyboard
-    component :keyboard
-  end
-
-  def display
-    component :display
-  end
-
-  def component(name)
-    info   = @data_source.send "get_#{name}_info",  @id
-    price  = @data_source.send "get_#{name}_price", @id
-
-    result = "#{name.capitalize}: #{info} ($#{price})"
-
-    return "* #{result}" if price >= 100
-    result
-  end
+  define_component :mouse
+  define_component :cpu
+  define_component :keyboard
+  define_component :display
 end
