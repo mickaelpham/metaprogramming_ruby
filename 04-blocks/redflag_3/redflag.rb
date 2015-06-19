@@ -25,6 +25,7 @@ lambda {
 load 'events.rb'
 
 each_event do |event|
-  each_setup { |s| s.call }
-  puts "ALERT: #{event[:description]}" if event[:condition].call
+  env = Object.new
+  each_setup { |setup| env.instance_eval &setup }
+  puts "ALERT: #{event[:description]}" if env.instance_eval &(event[:condition])
 end
