@@ -56,7 +56,7 @@ Callable Objects Wrap-Up
 Callable objects are snippets of code that you can evaluate, and they can carry
 their own scope along with them. They can be the following:
 
-* _Blocks_ (no really "objects" but still "callable"): evaluated in the scope in
+* _Blocks_ (not really "objects" but still "callable"): evaluated in the scope in
   which they're defined.
 * _Procs_: objects of class `Proc`. Like blocks, they are evaluated in the scope
   where they're defined.
