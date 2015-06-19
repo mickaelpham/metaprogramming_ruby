@@ -36,3 +36,16 @@ my_method # => "The top-level @var"
 You can access a top-level instance variable whenever `main` takes the role of
 `self`, as in the previous example. When any other object is `self`, the
 top-level instance variable is out of scope.
+
+### Scope Gates
+
+There are exactly three places where a program leaves the previous scope behind
+and opens a new one:
+
+* Class definitions
+* Module definitions
+* Methods
+
+Scope changes whenever the program enters (or exits) a class or module
+definition or a method. These three borders are marked by the keywords `class`,
+`module`, and `def`, respectively.
