@@ -29,3 +29,8 @@ class TestLoan < Test::Unit::TestCase
     assert_equal 'WAR AND PEACE loaned on Mon Apr 06 12:15:50', loan.to_s
   end
 end
+
+# Note that we used `instance_eval` here, but we could also have used
+# `class_eval` to modify the class instance variable. However, we used
+# `instance_eval` because we do not care if the object we are opening is a
+# class, we just want to switch the time value.
