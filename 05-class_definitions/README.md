@@ -10,3 +10,10 @@ Class Definitions
 
 * If you have a reference to the class, you can open the class with `class_eval`
   (or `module_eval`).
+
+Singleton Classes
+=================
+
+When you ask an object for its class, Ruby doesn't always tell you the whole
+truth. Instead of the class that you see, an object can hat its own special,
+hidden class. That's called the _singleton class_ of the object.
